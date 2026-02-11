@@ -242,29 +242,6 @@
                 @endif
             </div>
         </div>
-        
-        <!-- System Info -->
-        <div class="mt-6 bg-white shadow rounded-lg overflow-hidden">
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Informasi Sistem</h3>
-            </div>
-            <div class="border-t border-gray-200">
-                <dl>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Nama Aplikasi</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">Sistem Informasi Inventaris Empal Gentong</dd>
-                    </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Metode Pengembangan</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">Waterfall Model</dd>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Teknologi</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">Laravel, MySQL, Tailwind CSS</dd>
-                    </div>
-                </dl>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
