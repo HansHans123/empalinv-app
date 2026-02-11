@@ -115,6 +115,7 @@ class PosController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Transaksi berhasil disimpan',
+                'id' => $penjualan->id, # ini fix buat struk, kita liat apaka bisa  
                 'kode_transaksi' => $kodeTransaksi,
                 'total' => $total,
             ]);

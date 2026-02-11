@@ -340,7 +340,9 @@
                     // Tampilkan modal sukses
                     document.getElementById('successMessage').innerHTML = 
                         `Transaksi ${data.kode_transaksi} sebesar ${formatRupiah(data.total)} berhasil diproses.`;
-                    document.getElementById('btnCetakStruk').href = `/pos/struk/${data.kode_transaksi}`;
+                    // Buat template URL dari route name
+                    const strukUrlTemplate = "{{ route('pos.struk', ':id') }}";
+                    document.getElementById('btnCetakStruk').href = strukUrlTemplate.replace(':id', data.id); // ini sama yang di atas juga fix buat cetak struk -hanip
                     document.getElementById('successModal').classList.remove('hidden');
                     document.getElementById('successModal').classList.add('flex');
                     
