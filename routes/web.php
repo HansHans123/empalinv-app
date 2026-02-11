@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PosController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -29,10 +30,10 @@ Route::middleware(['auth'])->group(function () {
         });
     
     // POS Routes (Kasir only)
-    Route::middleware(['kasir'])->group(function () {
-        Route::get('/pos', function () {
-            return 'Halaman POS (Coming Soon)';
-        })->name('pos.index');
+    Route::middleware(['auth', 'kasir'])->group(function () {
+        Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
+        Route::post('/pos', [PosController::class, 'store'])->name('pos.store');
+        Route::get('/pos/struk/{id}', [PosController::class, 'struk'])->name('pos.struk');
     });
     
     // Stok Fisik Routes (Staf Dapur only)
