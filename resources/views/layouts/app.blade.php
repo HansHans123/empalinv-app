@@ -44,6 +44,18 @@
                             <i class="fas fa-utensils mr-2"></i> Menu
                         </a>
                         @endif
+                        
+                        {{-- ini menu buat laporan sama analisis --}}
+                        @if(auth()->user()->isAdmin())
+                        <a href="{{ route('laporan.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('laporan.*') ? 'border-orange-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                            <i class="fas fa-chart-bar mr-2"></i> Laporan
+                        </a>
+
+                        <!-- Dropdown atau submenu untuk analisis? Bisa dijadikan terpisah -->
+                        <a href="{{ route('analisis.selisih') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('analisis.*') ? 'border-orange-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                            <i class="fas fa-exclamation-triangle mr-2"></i> Analisis Selisih
+                        </a>
+                        @endif
 
                         @if(auth()->user()->isKasir())
                         <a href="{{ route('pos.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('pos.*') ? 'border-orange-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700">

@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\AnalisisController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -27,7 +29,21 @@ Route::middleware(['auth'])->group(function () {
         Route::post('menu/{menu}/resep', [MenuController::class, 'storeResep'])->name('menu.resep.store');
         Route::put('menu/{menu}/resep/{resep}', [MenuController::class, 'updateResep'])->name('menu.resep.update');
         Route::delete('menu/{menu}/resep/{resep}', [MenuController::class, 'destroyResep'])->name('menu.resep.destroy');
+        
+        // ini rute buat analitik sama laporan -hanip
+        Route::prefix('laporan')->name('laporan.')->group(function () {
+            Route::get('/', [LaporanController::class, 'index'])->name('index');
+            Route::get('/penjualan', [LaporanController::class, 'penjualan'])->name('penjualan');
+            Route::get('/stok', [LaporanController::class, 'stok'])->name('stok');
+            Route::get('/pengeluaran', [LaporanController::class, 'pengeluaran'])->name('pengeluaran');
         });
+
+        Route::prefix('analisis')->name('analisis.')->group(function () {
+            Route::get('/selisih', [AnalisisController::class, 'index'])->name('selisih');
+            Route::get('/opname', [AnalisisController::class, 'opname'])->name('opname');
+            Route::post('/opname', [AnalisisController::class, 'storeOpname'])->name('opname.store');
+        });
+    });
     
     // POS Routes (Kasir only)
     Route::middleware(['auth', 'kasir'])->group(function () {
