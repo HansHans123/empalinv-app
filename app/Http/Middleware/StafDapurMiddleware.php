@@ -4,13 +4,14 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class StafDapurMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role === 'staf_dapur') {
+        if (Auth::check() && Auth::user()->isStafDapur()) {
             return $next($request);
         }
         

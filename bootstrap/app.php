@@ -3,11 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\RedirectIfAuthenticated;
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\KasirMiddleware;
-use App\Http\Middleware\StafDapurMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -30,12 +25,13 @@ return Application::configure(basePath: dirname(__DIR__))
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]);
 
+        // Register middleware alias
         $middleware->alias([
-            'auth' => Authenticate::class,
-            'guest' => RedirectIfAuthenticated::class,
-            'admin' => AdminMiddleware::class,
-            'kasir' => KasirMiddleware::class,
-            'staf_dapur' => StafDapurMiddleware::class,
+            'auth' => \App\Http\Middleware\Authenticate::class,
+            'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'kasir' => \App\Http\Middleware\KasirMiddleware::class,
+            'staf_dapur' => \App\Http\Middleware\StafDapurMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
