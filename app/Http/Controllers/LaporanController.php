@@ -176,6 +176,7 @@ class LaporanController extends Controller
         $endDate = $request->input('end_date', now()->toDateString());
 
         $query = PembelianBahanBaku::with('bahanBaku', 'user')
+                    ->whereNotNull('tanggal') // ini fix buat page pengeluaran
                     ->whereBetween(DB::raw('DATE(tanggal)'), [$startDate, $endDate]);
 
         $totalPengeluaran = $query->sum('total');

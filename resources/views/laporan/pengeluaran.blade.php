@@ -5,6 +5,7 @@
 @section('content')
 <div class="py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
         <div class="md:flex md:items-center md:justify-between mb-6">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Laporan Pengeluaran (Pembelian Bahan)</h1>
@@ -17,11 +18,13 @@
             <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Dari Tanggal</label>
-                    <input type="date" name="start_date" value="{{ $startDate }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                    <input type="date" name="start_date" value="{{ $startDate }}" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Sampai Tanggal</label>
-                    <input type="date" name="end_date" value="{{ $endDate }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                    <input type="date" name="end_date" value="{{ $endDate }}" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
                 </div>
                 <div class="flex items-end">
                     <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-700">
@@ -52,7 +55,9 @@
             </div>
             <div class="bg-white p-4 shadow rounded-lg">
                 <div class="text-sm text-gray-500">Rata-rata per Transaksi</div>
-                <div class="text-xl font-bold text-gray-900">Rp {{ $totalTransaksiBeli > 0 ? number_format($totalPengeluaran / $totalTransaksiBeli, 0, ',', '.') : 0 }}</div>
+                <div class="text-xl font-bold text-gray-900">
+                    Rp {{ $totalTransaksiBeli > 0 ? number_format($totalPengeluaran / $totalTransaksiBeli, 0, ',', '.') : 0 }}
+                </div>
             </div>
         </div>
 
@@ -98,9 +103,9 @@
                         <div class="space-y-3 max-h-80 overflow-y-auto">
                             @foreach($perBahan as $bahan)
                                 <div class="flex justify-between items-center">
-                                    <span class="font-medium">{{ $bahan->bahanBaku->nama }}</span>
+                                    <span class="font-medium">{{ $bahan->bahanBaku->nama ?? 'Unknown' }}</span>
                                     <div>
-                                        <span class="text-sm text-gray-600">{{ number_format($bahan->total_qty, 2) }} {{ $bahan->bahanBaku->satuan }}</span>
+                                        <span class="text-sm text-gray-600">{{ number_format($bahan->total_qty, 2) }} {{ $bahan->bahanBaku->satuan ?? '' }}</span>
                                         <span class="ml-3 font-semibold text-gray-900">Rp {{ number_format($bahan->total, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
@@ -137,17 +142,33 @@
                         @forelse($pembelian as $p)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-blue-600">{{ $p->kode_pembelian }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $p->tanggal->format('d/m/Y') }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $p->bahanBaku->nama }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ number_format($p->jumlah, 2) }} {{ $p->bahanBaku->satuan }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">Rp {{ number_format($p->harga_satuan, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold">Rp {{ number_format($p->total, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $p->supplier ?? '-' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $p->user->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                {{ $p->tanggal ? $p->tanggal->format('d/m/Y') : '-' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                {{ $p->bahanBaku->nama ?? 'Bahan dihapus' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                {{ number_format($p->jumlah, 2) }} {{ $p->bahanBaku->satuan ?? '' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                Rp {{ number_format($p->harga_satuan, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold">
+                                Rp {{ number_format($p->total, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                {{ $p->supplier ?? '-' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                {{ $p->user->name ?? 'User dihapus' }}
+                            </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">Tidak ada data pembelian.</td>
+                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">
+                                Tidak ada data pembelian.
+                            </td>
                         </tr>
                         @endforelse
                     </tbody>
