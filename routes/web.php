@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\MenuController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -21,7 +22,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('bahan-baku', BahanBakuController::class);
         Route::post('bahan-baku/{bahanBaku}/update-stok', [BahanBakuController::class, 'updateStok'])->name('bahan-baku.update-stok');
         Route::get('bahan-baku-export/pdf', [BahanBakuController::class, 'exportPDF'])->name('bahan-baku.export.pdf');
-    });
+        Route::resource('menu', MenuController::class);
+        Route::post('menu/{menu}/resep', [MenuController::class, 'storeResep'])->name('menu.resep.store');
+        Route::put('menu/{menu}/resep/{resep}', [MenuController::class, 'updateResep'])->name('menu.resep.update');
+        Route::delete('menu/{menu}/resep/{resep}', [MenuController::class, 'destroyResep'])->name('menu.resep.destroy');
+        });
     
     // POS Routes (Kasir only)
     Route::middleware(['kasir'])->group(function () {

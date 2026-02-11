@@ -39,6 +39,12 @@
                         </a>
                         @endif
                         
+                        @if(auth()->user()->isAdmin())
+                        <a href="{{ route('menu.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('menu.*') ? 'border-orange-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                            <i class="fas fa-utensils mr-2"></i> Menu
+                        </a>
+                        @endif
+
                         @if(auth()->user()->isKasir())
                         <a href="#" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700">
                             <i class="fas fa-cash-register mr-2"></i> POS
