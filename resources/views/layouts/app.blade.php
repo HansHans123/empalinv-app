@@ -62,6 +62,12 @@
                             <i class="fas fa-cash-register mr-2"></i> POS
                         </a>
                         @endif
+
+                        @if(auth()->user()->isStafDapur())
+                        <a href="{{ route('stok-fisik.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('stok-fisik.*') ? 'border-orange-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                            <i class="fas fa-clipboard-check mr-2"></i> Stok Fisik
+                        </a>
+                        @endif
                     </div>
                 </div>
                 

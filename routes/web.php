@@ -8,6 +8,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AnalisisController;
+use App\Http\Controllers\StokFisikController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -52,10 +53,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pos/struk/{id}', [PosController::class, 'struk'])->name('pos.struk');
     });
     
-    // Stok Fisik Routes (Staf Dapur only)
-    Route::middleware(['staf_dapur'])->group(function () {
-        Route::get('/stok-fisik', function () {
-            return 'Halaman Stok Fisik (Coming Soon)';
-        })->name('stok-fisik.index');
+
+    Route::middleware(['auth', 'staf_dapur'])->prefix('stok-fisik')->name('stok-fisik.')->group(function () {
+        Route::get('/', [StokFisikController::class, 'index'])->name('index');
+        Route::get('/create/{id?}', [StokFisikController::class, 'create'])->name('create');
+        Route::post('/', [StokFisikController::class, 'store'])->name('store');
+        Route::get('/history', [StokFisikController::class, 'history'])->name('history');
+        Route::get('/get-stok/{id}', [StokFisikController::class, 'getStok'])->name('get-stok');
     });
 });
