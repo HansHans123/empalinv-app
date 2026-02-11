@@ -166,7 +166,7 @@
             <h3 class="text-lg font-medium text-gray-900 mb-4">Aksi Cepat</h3>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @if(auth()->user()->isAdmin())
-                <a href="#" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
+                <a href="{{ route('bahan-baku.index') }}" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-orange-100 rounded-md p-3">
@@ -180,7 +180,7 @@
                     </div>
                 </a>
                 
-                <a href="#" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
+                <a href="{{ route('menu.index') }}" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
@@ -194,7 +194,7 @@
                     </div>
                 </a>
                 
-                <a href="#" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
+                <a href="{{ route('laporan.index') }}" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
@@ -210,7 +210,7 @@
                 @endif
                 
                 @if(auth()->user()->isKasir())
-                <a href="#" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
+                <a href="{{ route('pos.index') }}" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
@@ -226,7 +226,7 @@
                 @endif
                 
                 @if(auth()->user()->isStafDapur())
-                <a href="#" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
+                <a href="{{ route('stok-fisik.index') }}" class="bg-white overflow-hidden shadow rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
